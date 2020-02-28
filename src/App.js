@@ -3,6 +3,7 @@ import IPFS from 'ipfs';
 import './App.css';
 import Lowdb from 'lowdb';
 import Adapter from 'ipfs-lowdb-adapter';
+import Web3 from 'web3';
 
 class App extends Component {
 
@@ -11,6 +12,7 @@ class App extends Component {
     this.state = {
       node : null,
       db : null,
+      web3 : null,
       todos : [ {content :"", isCompleted : false}]
     }
   }
@@ -26,6 +28,8 @@ class App extends Component {
     state.db = db;
     state.node = node;
     state.adapter = adapter;
+    state.web3 = new Web3('https://mainnet.infura.io/v3/a5a224951e5943fba29c5db776355d8c')
+    state.web3.eth.accounts.create().then(console.log);
     db.defaults({todos : [
       {
         content: "Create your todo list",
